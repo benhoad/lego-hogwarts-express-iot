@@ -1,0 +1,21 @@
+{
+    "bridge": {
+        "name": "Homebridge",
+        "username": "CC:22:3D:E2:CD:31",
+        "port": 51825,
+        "pin": "031-45-171"
+    },
+    
+    "description": "",
+
+    "accessories": [
+        {
+            "name":"Lego Train",
+            "accessory": "LegoTrain",
+            "accessUrl": "http://10.0.0... train ip"
+        }
+
+    ],
+
+    "platforms": []
+}
