@@ -1,0 +1,35 @@
+rest_command:
+  hogwarts_express_on:
+    method: post
+    url: "http://[TRAIN IP]/go?speed=80"
+  hogwarts_express_off:
+    method: post 
+    url: "http://[TRAIN IP]/go?speed=0"
+    
+input_boolean:
+  hogwarts_express_state:
+    name: Hogwarts Express State
+
+script:
+  hogwarts_express_on:
+    sequence:
+      - service: rest_command.hogwarts_express_on
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.hogwarts_express_state
+  hogwarts_express_off:
+    sequence:
+      - service: rest_command.hogwarts_express_off
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.hogwarts_express_state
+
+switch:
+  - platform: template
+    switches:
+      hogwarts_express:
+        friendly_name: Hogwarts Express
+        unique_id: hogwartsexpress
+        value_template: "{{ is_state('input_boolean.hogwarts_express_state', 'on') }}"
+        turn_on:
+          service: script.hogwarts_express_on
+        turn_off:
+          service: script.hogwarts_express_off
